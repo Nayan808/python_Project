@@ -59,6 +59,9 @@ update_button.place(x=28,y=400)
 delete_button=customtkinter.CTkButton(frame,font=font2,text_color='#fff',text="Delete",fg_color='#047E43',hover_color='#025B30',bg_color='#1B1B21',cursor='hand2',corner_radius=8,width=80)
 delete_button.place(x=160,y=400)
 
+
+# Working On Below Code
+
 # style=ttk.Style(app)
 
 # style.theme_use('clam')
