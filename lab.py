@@ -17,24 +17,6 @@ font1=('ARIAL',35,'bold')
 font2=('ARIAL',30,'bold')
 font3=('ARIAL',12,'bold')
 
-def create_chart():
-   product_details=database.fetch_inventory()
-   product_name=[product[1] for product in product_details]
-   stock_values=[product[2] for product in product_details]
-
-   figure=Figure(figsize=(8,3.8),dpi=80,facecolor='#0A0B0C')
-   ax=figure.add_subplot(111)
-   ax.bar(product_name,stock_values,width=0.4,color='#11EA05')
-   ax.set_xlabel("Product Name",color='#fff',fontsize=10)
-   ax.set_ylabel("Stock Value",color='#fff',fontsize=10)
-   ax.set_title("Product Stock Levels",color='#fff',fontsize=12)
-#    ax.tick_params(axis='x',labelcolor='#fff',fontsize=12)
-#    ax.tick_params(axis='y',labelcolor='#fff',fontsize=12)
-   ax.set_facecolor('#1B181B')
-
-   canvas=FigureCanvasTkAgg(figure)
-   canvas.draw()
-   canvas.get_tk_widget().grid(row=0,column=0,padx=475,pady=405)
 
 
 def Update():
@@ -46,12 +28,31 @@ def Update():
      name=name_entry.get()
      stock=stock_entry.get()
      price=price_entry.get()
-     database.update_inventory(name,stock,price,id)
+     database.update_inventory(id,name,stock,price)
      add_to_treeview()
      clear()
      create_chart()
      messagebox.showinfo('Success','Data has Been Updated')
       
+
+def create_chart():
+   product_details=database.fetch_inventory()
+   product_name=[product[1] for product in product_details]
+   stock_values=[product[2] for product in product_details]
+
+   figure=Figure(figsize=(8,3.8),dpi=80,facecolor='#0A0B0C')
+   ax=figure.add_subplot(111)
+   ax.bar(product_name,stock_values,width=0.4,color='#11EA05')
+   ax.set_xlabel("Product Name",color='#fff',fontsize=10)
+   ax.set_ylabel("Stock Value",color='#fff',fontsize=10)
+   ax.set_title("Product Stock Levels",color='#fff',fontsize=12)
+   ax.tick_params(axis='both',labelcolor='#fff')
+   ax.set_facecolor('#1B181B')
+
+   canvas=FigureCanvasTkAgg(figure)
+   canvas.draw()
+   canvas.get_tk_widget().grid(row=0,column=0,padx=475,pady=405)
+
 
 def display(event):
    selected_item=tree.focus()
@@ -76,8 +77,6 @@ def delete():
       clear()
       create_chart()
       messagebox.showinfo('Success','Data Has Been Deleted')
-
-
 
 def add_to_treeview():
    inventory=database.fetch_inventory()

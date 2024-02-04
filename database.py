@@ -3,7 +3,7 @@ def create_table():
   conn =sqlite3.connect('inventory.db')
   cursor=conn.cursor()
 
-  cursor.execute('''CREATE TABLE inventory(
+  cursor.execute('''CREATE TABLE IF NOT EXISTS inventory(
                  id TEXT PRIMARY KEY,
                  name TEXT,
                  in_stock INTEGER,
