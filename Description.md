@@ -27,5 +27,4 @@ To Digitalise Inventory Records From Paper Work
 
 # work Remaining 
 1. update fetch data
-2. element marking in table_chart 
 
